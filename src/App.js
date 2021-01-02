@@ -30,8 +30,8 @@ export default function App() {
   }, [list]);
 
   const isList = list.length > 0 ? true : false;
-  console.log(`listItems: ${JSON.stringify(list)}`);
-  console.log(`App: input: ${input}`);
+  // console.log(`listItems: ${JSON.stringify(list)}`);
+  // console.log(`App: input: ${input}`);
   return (
     <div className="App">
       <Grid container spacing={3}>

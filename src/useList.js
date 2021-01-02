@@ -37,7 +37,7 @@ const useList = () => {
 
     setList([...list, item]); // Set counters state
     // setInput('');               // Clear User Input
-    console.log(`useList: input : ${input}`);
+    // console.log(`useList: input : ${input}`);
   };
 
   const updateItem = (value, id) => {
@@ -81,7 +81,7 @@ const useList = () => {
       ...listItems[itemIndex],
       counterValue: newCounterValue
     };
-    console.log(`[incrementCounter] newCounterValue: ${newCounterValue}`);
+    // console.log(`[incrementCounter] newCounterValue: ${newCounterValue}`);
     setList([...listItems]);
   };
 
@@ -99,8 +99,8 @@ const useList = () => {
       ...listItems[itemIndex],
       counterValue: newCounterValue
     };
-    console.log(`listItems: ${JSON.stringify(listItems)}`);
-    console.log(`[decrementCounter] newCounterValue: ${newCounterValue}`);
+    // console.log(`listItems: ${JSON.stringify(listItems)}`);
+    // console.log(`[decrementCounter] newCounterValue: ${newCounterValue}`);
     setList([...listItems]);
   };
 

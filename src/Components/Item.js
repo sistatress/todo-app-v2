@@ -15,22 +15,22 @@ const Item = ({
   incrementCounter,
   decrementCounter
 }) => {
-    useEffect(() => {
-      const mounted = { current: true };
-      if (mounted) {
-        console.log(`item mounted`);
-        console.log(`_item props: ${JSON.stringify(item)}`);
-        console.log(`
-          itemID: ${item.itemId}
-          itemValue: ${item.itemValue}
-          counterValue: ${item.counterValue}`);
-      }
+  useEffect(() => {
+    const mounted = { current: true };
+    if (mounted) {
+      console.log(`item ${item.itemId} mounted!`);
+      //   console.log(`_item props: ${JSON.stringify(item)}`);
+      //   console.log(`
+      //     itemID: ${item.itemId}
+      //     itemValue: ${item.itemValue}
+      //     counterValue: ${item.counterValue}`);
+    }
 
-      return () => {
-        mounted.current = false;
-        console.log(`item unmounted!`);
-      };
-    }, [item]);
+    return () => {
+      mounted.current = false;
+      console.log(`item ${item.itemId} unmounted!`);
+    };
+  }, []);
 
   return (
     <animated.div key={item.itemId} style={style}>
@@ -72,7 +72,7 @@ const Item = ({
         </Grid>
       </div>
     </animated.div>
-    );
+  );
 };
 
 export default Item;

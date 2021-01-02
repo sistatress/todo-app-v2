@@ -1,11 +1,13 @@
-/***************** handle input items in List ****************/
+/***************** handle items in List ****************/
 
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import useCounter from "./useCounter";
 
 const useList = () => {
+  
   const { decrementCounter, incrementCounter } = useCounter();
+  
   const [list, setList] = useState([]);
 
   const getListSize = () => {
@@ -59,8 +61,8 @@ const useList = () => {
     setList(newList);
   };
 
-  const addCounterValue = (id, value) => {
-    //console.log(`value: ${value} Id: ${id}`);
+  const addCounterValue = (value, id) => {
+    console.log(`value: ${value} Id: ${id}`);
 
     const itemIndex = list.findIndex(
       (itemElement) => itemElement.itemId === id
@@ -69,18 +71,18 @@ const useList = () => {
     const listItems = [...list];
     const newCounterValue = incrementCounter(value);
 
-    //console.log(`listItems: ${JSON.stringify(listItems)}`);
-    //console.log(`newCounterValue: ${newCounterValue}`);
+    console.log(`[ addCounterValue ] listItems: ${JSON.stringify(listItems)}`);
+    console.log(`[ addCounterValue ] newCounterValue: ${newCounterValue}`);
 
     listItems[itemIndex] = {
       ...listItems[itemIndex],
       counterValue: newCounterValue
     };
-    // console.log(`[incrementCounter] newCounterValue: ${newCounterValue}`);
+    console.log(`[addCounterValue] newCounterValue: ${newCounterValue}`);
     setList([...listItems]);
   };
 
-  const removeCounterValue = (id, value) => {
+  const removeCounterValue = (value, id) => {
     //console.log(`value: ${value} Id: ${id}`);
 
     const itemIndex = list.findIndex(
@@ -94,8 +96,8 @@ const useList = () => {
       ...listItems[itemIndex],
       counterValue: newCounterValue
     };
-    // console.log(`listItems: ${JSON.stringify(listItems)}`);
-    // console.log(`[decrementCounter] newCounterValue: ${newCounterValue}`);
+    console.log(` [removeCounterValue] listItems: ${JSON.stringify(listItems)}`);
+    console.log(`[removeCounterValue] newCounterValue: ${newCounterValue}`);
     setList([...listItems]);
   };
 

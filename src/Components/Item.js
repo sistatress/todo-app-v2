@@ -44,7 +44,7 @@ const Item = ({
             <Input
               value={item.itemValue}
               onChange={(e) => updateItem(e.target.value, item.itemId)}
-              itemId={item.itemId}
+              id={item.itemId}
               className="input-items"
             />
           </Grid>
@@ -52,9 +52,9 @@ const Item = ({
             <Counter
               id={item.itemId}
               list={list}
-              incrementCounter={incrementCounter}
-              decrementCounter={decrementCounter}
               value={item.counterValue}
+              addCounterValue={incrementCounter}
+              removeCounterValue={decrementCounter}
             />
           </Grid>
           <Grid item xs={1} className="grid-item-delete-button">

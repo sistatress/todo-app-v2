@@ -6,8 +6,8 @@ import List from "./Components/List";
 // import InputUI from "./Components/InputUI";
 import NavBar from "./Components/NavigationBar";
 import { Grid, Input } from "@material-ui/core";
-import useList from "./useList";
-import useInput from "./useInput";
+import useList from "./Components/useList";
+import useInput from "./Components/useInput";
 
 export default function App() {
   // const [list, setList] = useState([]);

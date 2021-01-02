@@ -3,22 +3,20 @@
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import useInput from "./useInput";
-import useCounter from './useCounter';
+import useCounter from "./useCounter";
 
 const useList = () => {
-  
   const { input, setInput } = useInput();
-  const {decrementCounter,incrementCounter } = useCounter();
+  const { decrementCounter, incrementCounter } = useCounter();
   const [list, setList] = useState([]);
 
-  const listSize = list.length;
+  // const listSize = list.length;
 
-  useEffect(() => {
-    setInput('');
-  },[listSize])
-  
+  // useEffect(() => {
+  //   setInput('');
+  // })
+
   const createItem = (event) => {
-    
     //console.log(`listItems: ${JSON.stringify(list)}`);
     const eventComing = event.key;
     //console.log(`[ createItem 1] event Coming ${eventComing}`);
@@ -37,13 +35,12 @@ const useList = () => {
       counterValue: 0
     };
 
-    setList([...list, item]);   // Set counters state    
-    //setInput('');               // Clear User Input
-    console.log(`useList: input : ${input}`)
+    setList([...list, item]); // Set counters state
+    // setInput('');               // Clear User Input
+    console.log(`useList: input : ${input}`);
   };
 
   const updateItem = (value, id) => {
-    
     //console.log(`id : ${id}`)
 
     const itemIndex = list.findIndex(
@@ -68,9 +65,8 @@ const useList = () => {
   };
 
   const addCounterValue = (id, value) => {
-    
     //console.log(`value: ${value} Id: ${id}`);
-    
+
     const itemIndex = list.findIndex(
       (itemElement) => itemElement.itemId === id
     );
@@ -90,9 +86,8 @@ const useList = () => {
   };
 
   const removeCounterValue = (id, value) => {
-    
     //console.log(`value: ${value} Id: ${id}`);
-    
+
     const itemIndex = list.findIndex(
       (itemElement) => itemElement.itemId === id
     );
@@ -108,17 +103,17 @@ const useList = () => {
     console.log(`[decrementCounter] newCounterValue: ${newCounterValue}`);
     setList([...listItems]);
   };
-  
+
   return {
     list,
-    setList, 
-    createItem, 
-    updateItem, 
+    setList,
+    createItem,
+    updateItem,
     deleteItem,
     addCounterValue,
-    removeCounterValue  
-  }
-}
+    removeCounterValue
+  };
+};
 
 export default useList;
 

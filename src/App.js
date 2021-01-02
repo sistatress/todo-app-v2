@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { v4 as uuidv4 } from "uuid";
 import "./styles.css";
 import "./App.css";
@@ -13,7 +13,7 @@ export default function App() {
   // const [list, setList] = useState([]);
   // const [input, setInput] = useState("");
 
-  const { input, handleInput } = useInput();
+  const { input, setInput, handleInput } = useInput();
   //const {decrementCounter,incrementCounter } = useCounter();
 
   const {
@@ -24,6 +24,10 @@ export default function App() {
     addCounterValue,
     removeCounterValue
   } = useList();
+
+  useEffect(() => {
+    setInput("");
+  }, [list]);
 
   const isList = list.length > 0 ? true : false;
   console.log(`listItems: ${JSON.stringify(list)}`);

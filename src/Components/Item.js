@@ -1,8 +1,7 @@
 import React from "react";
-import Input from "./InputUI";
 import Counter from "./Counter";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
-import { Grid, IconButton } from "@material-ui/core";
+import { Grid, IconButton, Input } from "@material-ui/core";
 import { useEffect } from "react";
 import { animated } from "react-spring";
 
@@ -44,7 +43,7 @@ const Item = ({
           <Grid item xs={7}>
             <Input
               value={item.itemValue}
-              updateItem={updateItem}
+              onChange={(e) => updateItem(e.target.value, item.itemId)}
               itemId={item.itemId}
               className="input-items"
             />

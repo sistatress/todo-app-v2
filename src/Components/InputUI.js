@@ -1,44 +1,48 @@
 import React from "react";
 import Input from "@material-ui/core/Input";
 
-const InputUI = ({ value, itemId, ...action }, ref) => {
-  
-  //console.log(`Itemcomponent: itemID: ${itemId}`);
-  
-  const handleInput = action.handleInput;
-  const updateItem = action.updateItem;
-  const createItem = action.createItem;
-  //const itemId = action.itemId;
-  
+// const InputUI = ({ value, ...action }, ref) => {
 
-  const inputOnChangeAction =
-    updateItem === undefined
-      ? (e) => handleInput(e.target.value)
-      : (e) => updateItem(e.target.value, itemId);
+//   //console.log(`Itemcomponent: itemID: ${itemId}`);
 
-  const inputOnKeyPressAction =
-    createItem === undefined
-      ? () =>
-          console.log(
-            "TODO: tap Enter in list should permit to focus next item (input) "
-          )
-      : (event) => createItem(event);
+//   const handleInput = action.handleInput;
+//   const updateItem = action.updateItem;
+//   const createItem = action.createItem;
+//   const itemId = action.itemId;
 
-  // logInputAction(
-  //   handleInput,
-  //   updateItem,
-  //   createItem,
-  //   inputOnChangeAction,
-  //   inputOnKeyPressAction
-  // );
+//   const inputOnChangeAction =
+//     updateItem === undefined
+//       ? (e) => handleInput(e.target.value)
+//       : (e) => updateItem(e.target.value, itemId); // A VIRER
 
+//   const inputOnKeyPressAction =
+//     createItem === undefined
+//       ? () =>
+//           console.log(
+//             "TODO: tap Enter in list should permit to focus next item (input) "
+//           )
+//       : (event) => createItem(event);
+
+//   return (
+//     <>
+//       <Input
+//         inputComponent="input"
+//         value={value}
+//         onChange={inputOnChangeAction}
+//         onKeyPress={inputOnKeyPressAction}
+//       />
+//     </>
+//   );
+// };
+
+const InputUI = ({ value, handleInput, createItem }, ref) => {
   return (
     <>
       <Input
-        type="text"
+        inputComponent="input"
         value={value}
-        onChange={inputOnChangeAction}
-        onKeyPress={inputOnKeyPressAction}
+        handleInput={handleInput}
+        createItem={createItem}
       />
     </>
   );

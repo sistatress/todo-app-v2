@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import "./styles.css";
 import "./App.css";
 import List from "./Components/List";
-import InputUI from "./Components/InputUI";
+// import InputUI from "./Components/InputUI";
 import NavBar from "./Components/NavigationBar";
-import { Grid } from "@material-ui/core";
+import { Grid, Input } from "@material-ui/core";
 import useList from "./useList";
 import useInput from "./useInput";
 
@@ -18,6 +18,7 @@ export default function App() {
 
   const {
     list,
+    getListSize,
     createItem,
     updateItem,
     deleteItem,
@@ -29,7 +30,7 @@ export default function App() {
     setInput("");
   }, [list]);
 
-  const isList = list.length > 0 ? true : false;
+  const isListEmpty = getListSize() > 0 ? true : false;
   // console.log(`listItems: ${JSON.stringify(list)}`);
   // console.log(`App: input: ${input}`);
   return (
@@ -41,9 +42,9 @@ export default function App() {
         </Grid>
         <Grid className="main-grid" item={false} lg={12}>
           <Grid container direction="column" justify="space-between">
-            {isList && (
+            {isListEmpty && (
               <List
-                isList={isList}
+                isList={isListEmpty}
                 list={list}
                 updateItem={updateItem}
                 deleteItem={deleteItem}
@@ -55,10 +56,11 @@ export default function App() {
           {/* user-input */}
           <Grid item lg={8}>
             <div className="user-input">
-              <InputUI
+              <Input
                 value={input}
-                handleInput={handleInput}
-                createItem={createItem}
+                autoFocus={true}
+                onChange={(e) => handleInput(e.target.value)}
+                onKeyPress={(event) => createItem(event)}
               />
             </div>
           </Grid>

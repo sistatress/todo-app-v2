@@ -1,20 +1,17 @@
 /***************** handle input items in List ****************/
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import useInput from "./useInput";
 import useCounter from "./useCounter";
 
 const useList = () => {
-  const { input, setInput } = useInput();
   const { decrementCounter, incrementCounter } = useCounter();
   const [list, setList] = useState([]);
 
-  // const listSize = list.length;
-
-  // useEffect(() => {
-  //   setInput('');
-  // })
+  const getListSize = () => {
+    const listSize = list.length;
+    return listSize;
+  };
 
   const createItem = (event) => {
     //console.log(`listItems: ${JSON.stringify(list)}`);
@@ -36,8 +33,6 @@ const useList = () => {
     };
 
     setList([...list, item]); // Set counters state
-    // setInput('');               // Clear User Input
-    // console.log(`useList: input : ${input}`);
   };
 
   const updateItem = (value, id) => {
@@ -106,6 +101,7 @@ const useList = () => {
 
   return {
     list,
+    getListSize,
     setList,
     createItem,
     updateItem,

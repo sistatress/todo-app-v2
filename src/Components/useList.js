@@ -61,7 +61,7 @@ const useList = () => {
     setList(newList);
   };
 
-  const addCounterValue = (value, id) => {
+  const updateCounterValue = (value, id, isIncrement) => {
     console.log(`value: ${value} Id: ${id}`);
 
     const itemIndex = list.findIndex(
@@ -69,7 +69,8 @@ const useList = () => {
     );
 
     const listItems = [...list];
-    const newCounterValue = incrementCounter(value);
+
+    const newCounterValue = isIncrement === true ? incrementCounter(value) : decrementCounter(value);
 
     console.log(`[ addCounterValue ] listItems: ${JSON.stringify(listItems)}`);
     console.log(`[ addCounterValue ] newCounterValue: ${newCounterValue}`);
@@ -80,25 +81,16 @@ const useList = () => {
     };
     console.log(`[addCounterValue] newCounterValue: ${newCounterValue}`);
     setList([...listItems]);
+  }
+
+  const addCounterValue = (value, id) => {
+    const isIncrement = true;
+    updateCounterValue(value, id, isIncrement)
   };
 
   const removeCounterValue = (value, id) => {
-    //console.log(`value: ${value} Id: ${id}`);
-
-    const itemIndex = list.findIndex(
-      (itemElement) => itemElement.itemId === id
-    );
-
-    const listItems = [...list];
-    const newCounterValue = decrementCounter(value);
-
-    listItems[itemIndex] = {
-      ...listItems[itemIndex],
-      counterValue: newCounterValue
-    };
-    console.log(` [removeCounterValue] listItems: ${JSON.stringify(listItems)}`);
-    console.log(`[removeCounterValue] newCounterValue: ${newCounterValue}`);
-    setList([...listItems]);
+    const isIncrement = false;
+    updateCounterValue(value, id,isIncrement)
   };
 
   return {
@@ -122,9 +114,9 @@ export default useList;
     item1 : [0] item2 : [1], item3 : [2], ...
     
     [
-      {itemId : id0, value: inputValue, counterdefaultValue : 0}, // item1 : [0]
-      {itemId : id1, value: inputValue, counterValue: defaultValue=0}, // item2 : [1]
-      {itemId : id2, value: inputValue, counterValue: defaultValue=0}, // item3 : [2] 
+      {itemId : id0, value: inputValue, counterdefaultValue : 0},       // item1 : [0]
+      {itemId : id1, value: inputValue, counterValue: defaultValue=0},  // item2 : [1]
+      {itemId : id2, value: inputValue, counterValue: defaultValue=0},  // item3 : [2] 
       ...
     ]
   

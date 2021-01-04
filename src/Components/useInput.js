@@ -9,7 +9,11 @@ const useInput = () => {
     setInput(newInput);
   };
 
-  return { input, setInput, handleInput };
+  const clearInput = () => {
+    setInput('')
+  }
+
+  return { input, setInput, clearInput, handleInput };
 };
 
 export default useInput;

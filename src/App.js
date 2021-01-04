@@ -8,13 +8,10 @@ import NavBar from "./Components/NavigationBar";
 import { Grid, Input } from "@material-ui/core";
 import useList from "./Components/useList";
 import useInput from "./Components/useInput";
+import Container from "@material-ui/core/Container";
 
 export default function App() {
-  // const [list, setList] = useState([]);
-  // const [input, setInput] = useState("");
-
-  const { input, setInput, handleInput } = useInput();
-  //const {decrementCounter,incrementCounter } = useCounter();
+  const { input, clearInput, handleInput } = useInput();
 
   const {
     list,
@@ -27,7 +24,7 @@ export default function App() {
   } = useList();
 
   useEffect(() => {
-    setInput("");
+    clearInput();
   }, [list]);
 
   const isListEmpty = getListSize() > 0 ? true : false;
@@ -37,14 +34,13 @@ export default function App() {
     <div className="App">
       <Grid container spacing={3}>
         {/* Navigation Bar */}
-        <Grid item xs={12}>
+        <Grid item={true} xs={12}>
           <NavBar />
         </Grid>
-        <Grid className="main-grid" item={false} lg={12}>
-          <Grid container direction="column" justify="space-between">
+        <Grid className="main-grid">
+          <Grid item={true} xs={12}>
             {isListEmpty && (
               <List
-                isList={isListEmpty}
                 list={list}
                 updateItem={updateItem}
                 deleteItem={deleteItem}
@@ -54,19 +50,25 @@ export default function App() {
             )}
           </Grid>
           {/* user-input */}
-          <Grid item lg={8}>
-            <div className="user-input">
+          <Container className="user-input" direction="column">
+            <Grid
+              container
+              item={true}
+              xs={12}
+              justify="center"
+              alignItems="center"
+            >
               <Input
                 value={input}
                 autoFocus={true}
                 onChange={(e) => handleInput(e.target.value)}
                 onKeyPress={(event) => createItem(event)}
               />
-            </div>
-          </Grid>
+            </Grid>
+          </Container>
         </Grid>
         {/* <Grid item xs={1}>
-          <Paper className={classes.paper}>rigth xs=2</Paper>
+          <div>rigth xs=2</div>
         </Grid> */}
         {/* <Grid item xs={12}>
           <Paper className={classes.paper}>Footer xs=12</Paper>

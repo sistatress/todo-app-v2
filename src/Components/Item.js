@@ -14,6 +14,7 @@ const Item = ({
   incrementCounter,
   decrementCounter
 }) => {
+  
   useEffect(() => {
     const mounted = { current: true };
     if (mounted) {

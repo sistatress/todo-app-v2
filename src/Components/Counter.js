@@ -56,7 +56,7 @@ const Counter = ({ id, value, addCounterValue, removeCounterValue }) => {
         color="primary"
         size="small"
         className="counter-button counter"
-        onClick={(e) => addCounterValue(value, id)}
+        onClick={() => addCounterValue(value, id)}
       >
         <AddRoundedIcon />
       </IconButton>
@@ -64,7 +64,7 @@ const Counter = ({ id, value, addCounterValue, removeCounterValue }) => {
         color="primary"
         size="small"
         className="counter-button counter"
-        onClick={(e) => removeCounterValue(value, id)}
+        onClick={() => removeCounterValue(value, id)}
       >
         <RemoveRoundedIcon />
       </IconButton>

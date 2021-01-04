@@ -1,24 +1,21 @@
-/***************** handle input items in List ****************/
+/***************** handle items in List ****************/
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import useInput from "./useInput";
-import useCounter from './useCounter';
+import useCounter from "./useCounter";
 
 const useList = () => {
   
-  const { input, setInput } = useInput();
-  const {decrementCounter,incrementCounter } = useCounter();
+  const { decrementCounter, incrementCounter } = useCounter();
+  
   const [list, setList] = useState([]);
 
-  const listSize = list.length;
+  const getListSize = () => {
+    const listSize = list.length;
+    return listSize;
+  };
 
-  useEffect(() => {
-    setInput('');
-  },[listSize])
-  
   const createItem = (event) => {
-    
     //console.log(`listItems: ${JSON.stringify(list)}`);
     const eventComing = event.key;
     //console.log(`[ createItem 1] event Coming ${eventComing}`);
@@ -37,13 +34,10 @@ const useList = () => {
       counterValue: 0
     };
 
-    setList([...list, item]);   // Set counters state    
-    //setInput('');               // Clear User Input
-    console.log(`useList: input : ${input}`)
+    setList([...list, item]); // Set counters state
   };
 
   const updateItem = (value, id) => {
-    
     //console.log(`id : ${id}`)
 
     const itemIndex = list.findIndex(
@@ -67,10 +61,9 @@ const useList = () => {
     setList(newList);
   };
 
-  const addCounterValue = (id, value) => {
-    
-    //console.log(`value: ${value} Id: ${id}`);
-    
+  const addCounterValue = (value, id) => {
+    console.log(`value: ${value} Id: ${id}`);
+
     const itemIndex = list.findIndex(
       (itemElement) => itemElement.itemId === id
     );
@@ -78,21 +71,20 @@ const useList = () => {
     const listItems = [...list];
     const newCounterValue = incrementCounter(value);
 
-    //console.log(`listItems: ${JSON.stringify(listItems)}`);
-    //console.log(`newCounterValue: ${newCounterValue}`);
+    console.log(`[ addCounterValue ] listItems: ${JSON.stringify(listItems)}`);
+    console.log(`[ addCounterValue ] newCounterValue: ${newCounterValue}`);
 
     listItems[itemIndex] = {
       ...listItems[itemIndex],
       counterValue: newCounterValue
     };
-    console.log(`[incrementCounter] newCounterValue: ${newCounterValue}`);
+    console.log(`[addCounterValue] newCounterValue: ${newCounterValue}`);
     setList([...listItems]);
   };
 
-  const removeCounterValue = (id, value) => {
-    
+  const removeCounterValue = (value, id) => {
     //console.log(`value: ${value} Id: ${id}`);
-    
+
     const itemIndex = list.findIndex(
       (itemElement) => itemElement.itemId === id
     );
@@ -104,21 +96,22 @@ const useList = () => {
       ...listItems[itemIndex],
       counterValue: newCounterValue
     };
-    console.log(`listItems: ${JSON.stringify(listItems)}`);
-    console.log(`[decrementCounter] newCounterValue: ${newCounterValue}`);
+    console.log(` [removeCounterValue] listItems: ${JSON.stringify(listItems)}`);
+    console.log(`[removeCounterValue] newCounterValue: ${newCounterValue}`);
     setList([...listItems]);
   };
-  
+
   return {
     list,
-    setList, 
-    createItem, 
-    updateItem, 
+    getListSize,
+    setList,
+    createItem,
+    updateItem,
     deleteItem,
     addCounterValue,
-    removeCounterValue  
-  }
-}
+    removeCounterValue
+  };
+};
 
 export default useList;
 

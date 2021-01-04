@@ -1,20 +1,18 @@
 import React from "react";
 import Input from "@material-ui/core/Input";
 
-const InputUI = ({ value, itemId, ...action }, ref) => {
-  
+const InputUI = ({ value, ...action }, ref) => {
   //console.log(`Itemcomponent: itemID: ${itemId}`);
-  
+
   const handleInput = action.handleInput;
   const updateItem = action.updateItem;
   const createItem = action.createItem;
-  //const itemId = action.itemId;
-  
+  const itemId = action.itemId;
 
   const inputOnChangeAction =
     updateItem === undefined
       ? (e) => handleInput(e.target.value)
-      : (e) => updateItem(e.target.value, itemId);
+      : (e) => updateItem(e.target.value, itemId); // A VIRER
 
   const inputOnKeyPressAction =
     createItem === undefined
@@ -24,18 +22,10 @@ const InputUI = ({ value, itemId, ...action }, ref) => {
           )
       : (event) => createItem(event);
 
-  // logInputAction(
-  //   handleInput,
-  //   updateItem,
-  //   createItem,
-  //   inputOnChangeAction,
-  //   inputOnKeyPressAction
-  // );
-
   return (
     <>
       <Input
-        type="text"
+        inputComponent="input"
         value={value}
         onChange={inputOnChangeAction}
         onKeyPress={inputOnKeyPressAction}

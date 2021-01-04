@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 import grey from "@material-ui/core/colors/grey";
+// import useList from "./useList";
 
 const theme = createMuiTheme({
   palette: {
@@ -38,10 +39,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Counter = ({ id, value, incrementCounter, decrementCounter }) => {
-  
+const Counter = ({ id, value, addCounterValue, removeCounterValue }) => {
   //console.log(`value: ${value}, id: ${id}`);
-  
+  // const { list, setList } = useList();
+
   const classes = useStyles();
 
   return (
@@ -55,7 +56,7 @@ const Counter = ({ id, value, incrementCounter, decrementCounter }) => {
         color="primary"
         size="small"
         className="counter-button counter"
-        onClick={() => incrementCounter(id, value)}
+        onClick={(e) => addCounterValue(value, id)}
       >
         <AddRoundedIcon />
       </IconButton>
@@ -63,7 +64,7 @@ const Counter = ({ id, value, incrementCounter, decrementCounter }) => {
         color="primary"
         size="small"
         className="counter-button counter"
-        onClick={() => decrementCounter(id, value)}
+        onClick={(e) => removeCounterValue(value, id)}
       >
         <RemoveRoundedIcon />
       </IconButton>

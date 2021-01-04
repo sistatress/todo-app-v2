@@ -1,23 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { v4 as uuidv4 } from "uuid";
 import "./styles.css";
 import "./App.css";
 import List from "./Components/List";
-import InputUI from "./Components/InputUI";
+// import InputUI from "./Components/InputUI";
 import NavBar from "./Components/NavigationBar";
-import { Grid } from "@material-ui/core";
-import useList from "./useList";
-import useInput from "./useInput";
+import { Grid, Input } from "@material-ui/core";
+import useList from "./Components/useList";
+import useInput from "./Components/useInput";
 
 export default function App() {
   // const [list, setList] = useState([]);
   // const [input, setInput] = useState("");
 
-  const { input, handleInput } = useInput();
+  const { input, setInput, handleInput } = useInput();
   //const {decrementCounter,incrementCounter } = useCounter();
 
   const {
     list,
+    getListSize,
     createItem,
     updateItem,
     deleteItem,
@@ -25,9 +26,13 @@ export default function App() {
     removeCounterValue
   } = useList();
 
-  const isList = list.length > 0 ? true : false;
-  console.log(`listItems: ${JSON.stringify(list)}`);
-  console.log(`App: input: ${input}`);
+  useEffect(() => {
+    setInput("");
+  }, [list]);
+
+  const isListEmpty = getListSize() > 0 ? true : false;
+  // console.log(`listItems: ${JSON.stringify(list)}`);
+  // console.log(`App: input: ${input}`);
   return (
     <div className="App">
       <Grid container spacing={3}>
@@ -37,9 +42,9 @@ export default function App() {
         </Grid>
         <Grid className="main-grid" item={false} lg={12}>
           <Grid container direction="column" justify="space-between">
-            {isList && (
+            {isListEmpty && (
               <List
-                isList={isList}
+                isList={isListEmpty}
                 list={list}
                 updateItem={updateItem}
                 deleteItem={deleteItem}
@@ -51,10 +56,11 @@ export default function App() {
           {/* user-input */}
           <Grid item lg={8}>
             <div className="user-input">
-              <InputUI
+              <Input
                 value={input}
-                handleInput={handleInput}
-                createItem={createItem}
+                autoFocus={true}
+                onChange={(e) => handleInput(e.target.value)}
+                onKeyPress={(event) => createItem(event)}
               />
             </div>
           </Grid>
